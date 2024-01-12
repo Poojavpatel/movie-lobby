@@ -30,7 +30,7 @@ class AppServer {
     const connectOptions: mongoose.ConnectOptions = {};
 
     try {
-      const db = await mongoose.connect(mongoURI, connectOptions);
+      await mongoose.connect(mongoURI, connectOptions);
       console.log("Successfully connected to mongodb");
     } catch (error) {
       console.log("Error connecting to mongodb", error);

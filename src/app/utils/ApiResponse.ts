@@ -1,5 +1,6 @@
 import { COMMON_ERROR_TYPES } from "./ErrorCodes";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class ApiResponse<T> {
   public static sendSuccess(res: any, data?: any) {
     res.type("application/json");

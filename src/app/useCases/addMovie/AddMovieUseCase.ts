@@ -2,7 +2,6 @@ import { GenreEnum, IMoviePersistance } from "../../models/Movie";
 import { IMovieRepo } from "../../repos/MovieRepo";
 import { Result } from "../../utils/Result";
 import { Validate } from "../../utils/Validate";
-import * as _ from "lodash";
 
 export interface IAddMovieRequestDTO {
   title: string;
@@ -41,7 +40,7 @@ export class AddMovieUseCase {
         streamingLink,
       };
 
-      const newMovie = this.movieRepo.addMovie(newMovieRaw);
+      await this.movieRepo.addMovie(newMovieRaw);
 
       return Result.success("Movie added successfully");
     } catch (error) {

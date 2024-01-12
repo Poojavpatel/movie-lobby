@@ -27,11 +27,7 @@ class AddMovieRouter {
 
       return ApiResponse.sendSuccess(res, result.value);
     } catch (err) {
-      console.log("Error :", err);
-
-      return res.status(500).json({
-        message: "INTERNAL_SERVER_ERROR",
-      });
+      ApiResponse.sendError(res, err);
     }
   }
 }

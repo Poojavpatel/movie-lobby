@@ -4,7 +4,7 @@ export class Result<T> {
   private _error?: any;
   private _value?: T;
 
-  private constructor(value?: T, error?: any, type?: string, body?: string) {
+  private constructor(value?: T, error?: any) {
     this._value = value;
     this._error = error;
   }

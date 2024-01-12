@@ -1,5 +1,4 @@
 import { MongoClient, Db, Collection } from "mongodb";
-import { InsertManyResult } from "mongoose";
 import { GenreEnum } from "../models/Movie";
 
 async function setupDB(): Promise<void> {
@@ -61,9 +60,7 @@ async function createMoviesCollection(db: Db): Promise<void> {
     },
   ];
 
-  const result: InsertManyResult<Document> = await moviesCollection.insertMany(
-    moviesData
-  );
+  await moviesCollection.insertMany(moviesData);
 }
 
 setupDB().then().catch();
