@@ -1,16 +1,12 @@
-import { COMMON_ERROR_CODES } from "./ErrorCodes";
+import { COMMON_ERROR_TYPES } from "./ErrorCodes";
 
 export class Result<T> {
   private _error?: any;
   private _value?: T;
-  private errorType?: string;
-  private errorMessage?: string;
 
   private constructor(value?: T, error?: any, type?: string, body?: string) {
     this._value = value;
     this._error = error;
-    this.errorType = type;
-    this.errorMessage = body;
   }
 
   get error(): any {
@@ -30,20 +26,16 @@ export class Result<T> {
   }
 
   static authFailed<T>(body: string): Result<T> {
-    return new Result<T>(
-      undefined,
-      undefined,
-      COMMON_ERROR_CODES.FORBIDDEN,
-      body
-    );
+    return new Result<T>(undefined, {
+      type: COMMON_ERROR_TYPES.FORBIDDEN,
+      body,
+    });
   }
 
   static validationFailed<T>(body: string): Result<T> {
-    return new Result<T>(
-      undefined,
-      undefined,
-      COMMON_ERROR_CODES.INVALID_REQUEST,
-      body
-    );
+    return new Result<T>(undefined, {
+      type: COMMON_ERROR_TYPES.INVALID_REQUEST,
+      body,
+    });
   }
 }

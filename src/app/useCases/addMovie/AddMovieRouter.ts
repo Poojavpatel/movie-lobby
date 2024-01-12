@@ -23,10 +23,10 @@ class AddMovieRouter {
       const result = await this.useCase.execute(dto);
 
       if (result.error) {
-        ApiResponse.sendError(res, result.error);
+        return ApiResponse.sendError(res, result.error);
       }
 
-      ApiResponse.sendSuccess(res, result.value);
+      return ApiResponse.sendSuccess(res, result.value);
     } catch (err) {
       console.log("Error :", err);
 

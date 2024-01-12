@@ -1,6 +1,6 @@
 import { GenreEnum, IMoviePersistance } from "../../models/Movie";
 import { IMovieRepo } from "../../repos/MovieRepo";
-import { COMMON_ERROR_CODES } from "../../utils/ErrorCodes";
+import { COMMON_ERROR_TYPES } from "../../utils/ErrorCodes";
 import { Result } from "../../utils/Result";
 import { Validate } from "../../utils/Validate";
 import * as _ from "lodash";
@@ -32,7 +32,7 @@ export class AddMovieUseCase {
       if (genre) {
         const check = Validate.againstValidEnums(GenreEnum, genre);
         if (!check.isValid) {
-          return Result.failure(check.message);
+          return Result.validationFailed(check.message!);
         }
       }
 
