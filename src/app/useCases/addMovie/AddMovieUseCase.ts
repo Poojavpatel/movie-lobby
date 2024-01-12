@@ -1,12 +1,10 @@
 import { GenreEnum, IMoviePersistance } from "../../models/Movie";
 import { IMovieRepo } from "../../repos/MovieRepo";
-import { COMMON_ERROR_TYPES } from "../../utils/ErrorCodes";
 import { Result } from "../../utils/Result";
 import { Validate } from "../../utils/Validate";
 import * as _ from "lodash";
 
 export interface IAddMovieRequestDTO {
-  // userId: string;
   title: string;
   genre?: string;
   rating?: number;
@@ -35,8 +33,6 @@ export class AddMovieUseCase {
           return Result.validationFailed(check.message!);
         }
       }
-
-      // TODO : validate user role
 
       const newMovieRaw: IMoviePersistance = {
         title,

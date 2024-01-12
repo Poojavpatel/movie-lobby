@@ -1,0 +1,24 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "ignorePatterns": ["build/"],
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "no-console": "error",
+    "no-unused-vars": 1,
+    "require-await": "error"
+  }
+}

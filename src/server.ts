@@ -25,6 +25,7 @@ class AppServer {
   }
 
   private async dbConnection() {
+    /* Todo : Read db credentials from env variables */
     const mongoURI = `mongodb://127.0.0.1:27017/lobby`;
     const connectOptions: mongoose.ConnectOptions = {};
 

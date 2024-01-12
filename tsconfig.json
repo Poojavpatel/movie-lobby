@@ -4,8 +4,8 @@
     "outDir": "./build",
     "rootDir": "./src",
     "strict": true,
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "esModuleInterop": true
   },
   "include": ["src/**/*.ts"],

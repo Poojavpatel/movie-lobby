@@ -12,7 +12,6 @@ class AddMovieRouter {
 
   public async execute(req: express.Request, res: express.Response) {
     try {
-      // TODO append userId from middleware
       const dto: IAddMovieRequestDTO = {
         title: req.body?.title,
         genre: req.body?.genre,
