@@ -1,3 +1,5 @@
+import { ObjectId } from "bson";
+
 export interface IValidationResult {
   isValid: boolean;
   message?: string;
@@ -16,8 +18,23 @@ export class Validate {
     } else {
       return {
         isValid: false,
-        message: `${argumentName} is not a valid enum in provided list.`,
+        message: `${argumentName} is not a valid enum.`,
       };
     }
+  }
+
+  public static againstInvalidObjectId(id: string, argumentName: string): IValidationResult {
+    if (!id) {
+      return { isValid: false, message: `${argumentName} is null or undefined` };
+    }
+
+    if (ObjectId.isValid(id)) {
+      const objectId = new ObjectId(id);
+
+      if (objectId.toString() === id) {
+        return { isValid: true };
+      }
+    }
+    return { isValid: false, message: `${argumentName} is not a valid ObjectId.` };
   }
 }

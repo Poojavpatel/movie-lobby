@@ -1,5 +1,8 @@
 import express from "express";
-import { UpdateMovieUseCase } from "./UpdateMovieUseCase";
+import {
+  UpdateMovieUseCase,
+  IUpdateMovieRequestDTO
+} from "./UpdateMovieUseCase";
 import ApiResponse from "../../utils/ApiResponse";
 import movieRepo from "../../repos/MovieRepo";
 
@@ -12,15 +15,23 @@ class UpdateMovieRouter {
 
   public async execute(req: express.Request, res: express.Response) {
     try {
-      const result = await this.useCase.execute();
+      const dto: IUpdateMovieRequestDTO = {
+        movieId: req.params?.id,
+        title: req.body?.title,
+        genre: req.body?.genre,
+        rating: req.body?.rating,
+        streamingLink: req.body?.streamingLink
+      };
+
+      const result = await this.useCase.execute(dto);
 
       if (result.error) {
-        ApiResponse.sendError(res, result.error);
+        return ApiResponse.sendError(res, result.error);
       }
 
-      ApiResponse.sendSuccess(res, result.value);
+      return ApiResponse.sendSuccess(res, result.value);
     } catch (err) {
-      ApiResponse.sendError(res, err);
+      return ApiResponse.sendError(res, err);
     }
   }
 }

@@ -49,7 +49,7 @@ class AppServer {
     );
 
     this._app.use("/", router);
-    this._app.use("/api", appRouter);
+    this._app.use("/", appRouter);
   }
 
   public listen() {

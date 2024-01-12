@@ -1,5 +1,10 @@
 import { IMovieRepo } from "../../repos/MovieRepo";
 import { Result } from "../../utils/Result";
+import { Validate } from "../../utils/Validate";
+
+export interface IDeleteMovieRequestDTO {
+  movieId: string;
+}
 
 export class DeleteMovieUseCase {
   private movieRepo: IMovieRepo;
@@ -8,10 +13,25 @@ export class DeleteMovieUseCase {
     this.movieRepo = movieRepo;
   }
 
-  public async execute(): Promise<Result<any>> {
+  public async execute(request: IDeleteMovieRequestDTO): Promise<Result<any>> {
     try {
-      const movies = await this.movieRepo.getAllMovies();
-      return Result.success(movies);
+      const {movieId} = request;
+      
+      /* validate movieId is a valid objectId */
+      const check = Validate.againstInvalidObjectId(movieId, "movieId");
+      if (!check.isValid) {
+        return Result.validationFailed(check.message!);
+      }
+
+      const movie = await this.movieRepo.findMovieById(movieId);
+
+      if(!movie){
+        return Result.validationFailed(`No movie found with id ${movieId}`);
+      }
+
+      await this.movieRepo.deleteMovie(movieId);
+      
+      return Result.success({message: "Movie deleted successfully"});
     } catch (error) {
       return Result.failure(error);
     }

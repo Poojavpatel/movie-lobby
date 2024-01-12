@@ -1,6 +1,10 @@
 import { IMovieRepo } from "../../repos/MovieRepo";
 import { Result } from "../../utils/Result";
 
+export interface ISearchMovieRequestDTO {
+  searchTerm: string;
+}
+
 export class SearchMoviesUseCase {
   private movieRepo: IMovieRepo;
 
@@ -8,9 +12,15 @@ export class SearchMoviesUseCase {
     this.movieRepo = movieRepo;
   }
 
-  public async execute(): Promise<Result<any>> {
+  public async execute(request: ISearchMovieRequestDTO): Promise<Result<any>> {
     try {
-      const movies = await this.movieRepo.getAllMovies();
+      const {searchTerm} = request;
+
+      if(!searchTerm){
+        return Result.validationFailed('query is empty');
+      }
+
+      const movies = await this.movieRepo.findMoviesByTitleOrGenre(searchTerm);
       return Result.success(movies);
     } catch (error) {
       return Result.failure(error);

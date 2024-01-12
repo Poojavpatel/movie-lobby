@@ -37,12 +37,12 @@ export class AddMovieUseCase {
         title,
         genre,
         rating,
-        streamingLink,
+        streamingLink
       };
 
       await this.movieRepo.addMovie(newMovieRaw);
 
-      return Result.success("Movie added successfully");
+      return Result.success({message: "Movie added successfully"});
     } catch (error) {
       return Result.failure(error);
     }

@@ -1,5 +1,5 @@
 import express from "express";
-import { SearchMoviesUseCase } from "./SearchMoviesUseCase";
+import { ISearchMovieRequestDTO, SearchMoviesUseCase } from "./SearchMoviesUseCase";
 import ApiResponse from "../../utils/ApiResponse";
 import movieRepo from "../../repos/MovieRepo";
 
@@ -12,16 +12,21 @@ class SearchMoviesRouter {
 
   public async execute(req: express.Request, res: express.Response) {
     try {
-      const result = await this.useCase.execute();
+      const dto: ISearchMovieRequestDTO = {
+        searchTerm: req.query?.q as string
+      };
+
+      const result = await this.useCase.execute(dto);
 
       if (result.error) {
-        ApiResponse.sendError(res, result.error);
+        return ApiResponse.sendError(res, result.error);
       }
 
-      ApiResponse.sendSuccess(res, result.value);
+      return ApiResponse.sendSuccess(res, result.value);
     } catch (err) {
-      ApiResponse.sendError(res, err);
+      return ApiResponse.sendError(res, err);
     }
+      
   }
 }
 

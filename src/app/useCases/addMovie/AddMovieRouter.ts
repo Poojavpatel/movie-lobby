@@ -27,7 +27,7 @@ class AddMovieRouter {
 
       return ApiResponse.sendSuccess(res, result.value);
     } catch (err) {
-      ApiResponse.sendError(res, err);
+      return ApiResponse.sendError(res, err);
     }
   }
 }

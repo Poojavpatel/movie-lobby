@@ -15,12 +15,12 @@ class ListMoviesRouter {
       const result = await this.useCase.execute();
 
       if (result.error) {
-        ApiResponse.sendError(res, result.error);
+        return ApiResponse.sendError(res, result.error);
       }
 
-      ApiResponse.sendSuccess(res, result.value);
+      return ApiResponse.sendSuccess(res, result.value);
     } catch (err) {
-      ApiResponse.sendError(res, err);
+      return ApiResponse.sendError(res, err);
     }
   }
 }

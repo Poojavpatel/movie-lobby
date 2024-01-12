@@ -1,5 +1,5 @@
 import express from "express";
-import { DeleteMovieUseCase } from "./DeleteMovieUseCase";
+import { DeleteMovieUseCase, IDeleteMovieRequestDTO } from "./DeleteMovieUseCase";
 import ApiResponse from "../../utils/ApiResponse";
 import movieRepo from "../../repos/MovieRepo";
 
@@ -12,15 +12,19 @@ class DeleteMovieRouter {
 
   public async execute(req: express.Request, res: express.Response) {
     try {
-      const result = await this.useCase.execute();
+      const dto: IDeleteMovieRequestDTO = {
+        movieId: req.params?.id,
+      };
+
+      const result = await this.useCase.execute(dto);
 
       if (result.error) {
-        ApiResponse.sendError(res, result.error);
+        return ApiResponse.sendError(res, result.error);
       }
 
-      ApiResponse.sendSuccess(res, result.value);
+      return ApiResponse.sendSuccess(res, result.value);
     } catch (err) {
-      ApiResponse.sendError(res, err);
+      return ApiResponse.sendError(res, err);
     }
   }
 }
