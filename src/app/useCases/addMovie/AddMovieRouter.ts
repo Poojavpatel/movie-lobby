@@ -3,7 +3,7 @@ import { AddMovieUseCase, IAddMovieRequestDTO } from "./AddMovieUseCase";
 import ApiResponse from "../../utils/ApiResponse";
 import movieRepo from "../../repos/MovieRepo";
 
-class AddMovieRouter {
+export class AddMovieRouter {
   private useCase: AddMovieUseCase;
 
   constructor(useCase: AddMovieUseCase) {
