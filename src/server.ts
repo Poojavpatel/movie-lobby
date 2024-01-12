@@ -1,6 +1,7 @@
 import bodyParser from "body-parser";
 import express from "express";
 import { appRouter } from "./appRouter";
+import mongoose from "mongoose";
 
 class AppServer {
   private port: string | number;
@@ -11,6 +12,7 @@ class AppServer {
     this.port = process.env.PORT || this.defaultPort;
     this._app = express();
     this.config();
+    this.dbConnection();
     this.routes();
   }
 
@@ -20,6 +22,18 @@ class AppServer {
         type: "application/json",
       })
     );
+  }
+
+  private async dbConnection() {
+    const mongoURI = `mongodb://127.0.0.1:27017/lobby`;
+    const connectOptions: mongoose.ConnectOptions = {};
+
+    try {
+      const db = await mongoose.connect(mongoURI, connectOptions);
+      console.log("Successfully connected to mongodb");
+    } catch (error) {
+      console.log("Error connecting to mongodb", error);
+    }
   }
 
   private routes() {

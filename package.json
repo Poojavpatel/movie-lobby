@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec 'tsc && node build/index.js' --watch src --ext ts",
     "server": "tsc && node build/index.js",
+    "setupDB": "tsc && node build/app/utils/setupDB.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
