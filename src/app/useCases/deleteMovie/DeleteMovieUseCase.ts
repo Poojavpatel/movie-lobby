@@ -1,7 +1,7 @@
 import { IMovieRepo } from "../../repos/MovieRepo";
 import { Result } from "../../utils/Result";
 
-export class ListMoviesUseCase {
+export class DeleteMovieUseCase {
   private movieRepo: IMovieRepo;
 
   constructor(movieRepo: IMovieRepo) {

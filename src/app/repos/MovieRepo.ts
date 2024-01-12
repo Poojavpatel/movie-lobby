@@ -1,7 +1,8 @@
-import { IMovieModel, movieModel } from "../models/Movie";
+import { IMovieModel, IMoviePersistance, movieModel } from "../models/Movie";
 
 export interface IMovieRepo {
   getAllMovies(): Promise<any[]>;
+  addMovie(movie: IMoviePersistance): Promise<void>;
 }
 
 class MovieRepo implements IMovieRepo {
@@ -9,6 +10,10 @@ class MovieRepo implements IMovieRepo {
 
   constructor(movieModel: IMovieModel) {
     this.movieModel = movieModel;
+  }
+
+  public async addMovie(movie: IMoviePersistance): Promise<void> {
+    await this.movieModel.insertMany([movie]);
   }
 
   public async getAllMovies(): Promise<any[]> {

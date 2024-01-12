@@ -1,5 +1,12 @@
 import { Model, Schema, model } from "mongoose";
-import Helper from "../utils/helper";
+import Helper from "../utils/Helper";
+
+export interface IMoviePersistance {
+  title: string;
+  genre?: string;
+  rating?: number;
+  streamingLink?: string;
+}
 
 export interface IMovie extends Document {
   title: string;
