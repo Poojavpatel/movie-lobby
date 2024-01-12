@@ -32,7 +32,9 @@
     "mock-req-res": "^1.2.1",
     "nodemon": "^3.0.2",
     "sinon-chai": "^3.7.0",
-    "ts-mocha": "^10.0.0",
-    "typescript": "^5.3.3"
+    "ts-mocha": "^10.0.0"
+  },
+  "engines": {
+    "node": "18.18.2"
   }
 }

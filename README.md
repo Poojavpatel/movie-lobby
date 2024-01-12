@@ -2,6 +2,9 @@
 
 ## To setup and run API on local
 
+Node version : v18.18.2  
+Mongod version : v7.0.2
+
 ```bash
 gh repo clone Poojavpatel/movie-lobby # clone the git repo
 cd movie-lobby                        # cd to codebase
